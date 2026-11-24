@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Jessé Auto Couros e Capotas</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Jessé Auto Couros">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<style>
+:root{--er:#c62828;--o:#f58220;--bg:#f6f6f5;--cd:#fff;--tx:#1c1c1c;--mu:#6b6b6b;--bd:#e4e4e2;--sh:0 2px 12px rgba(0,0,0,.09);--nh:58px;color-scheme:light}
+[data-theme=dark]{--er:#ff7b7b;--bg:#121212;--cd:#1b1b1b;--tx:#f2f2f2;--mu:#a3a3a3;--bd:#2c2c2c;--sh:0 2px 14px rgba(0,0,0,.55);color-scheme:dark}
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:local('Inter Regular'),local('Inter-Regular'),url('fonts/Inter-Regular.woff') format('woff')}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:local('Inter SemiBold'),local('Inter-SemiBold'),url('fonts/Inter-SemiBold.woff') format('woff')}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:local('Inter Bold'),local('Inter-Bold'),url('fonts/Inter-Bold.woff') format('woff')}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-bottom:90px}
+body{margin:0;font:14.5px/1.4 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx)}
+/* cabeçalho */
+header{background:#000;display:flex;align-items:center;gap:10px;padding:5px 14px;padding-top:calc(5px + env(safe-area-inset-top,0px));position:sticky;top:0;z-index:5}
+header img{height:34px;border-radius:4px}header b{color:#fff;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+/* navegação inferior */
+nav{position:fixed;left:0;right:0;bottom:0;z-index:6;display:flex;background:var(--cd);border-top:1px solid var(--bd);box-shadow:var(--sh);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav>a,nav>button{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:var(--nh);padding:0 2px;color:var(--mu);background:none;border:0;font:inherit;font-size:10.5px;font-weight:600;text-decoration:none;cursor:pointer;position:relative}
+nav .ic{width:22px;height:22px}nav span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+nav .on{color:var(--o)}nav>.on::before{content:"";position:absolute;top:0;left:28%;right:28%;height:2px;background:var(--o);border-radius:0 0 2px 2px}
+.more{position:absolute;right:8px;bottom:calc(100% + 8px);min-width:200px;background:var(--cd);border:1px solid var(--bd);border-radius:12px;box-shadow:var(--sh);padding:4px;display:flex;flex-direction:column}
+nav .more a{display:flex;align-items:center;gap:10px;height:42px;padding:0 12px;border-radius:8px;color:var(--tx);text-decoration:none;font-size:14px;font-weight:600}
+nav .more a:hover{background:var(--bg)}nav .more a.on{color:var(--o)}nav .more .ic{width:18px;height:18px}
+.ic{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+body.kb nav{display:none}
+@media(max-width:359px){nav>a,nav>button{font-size:9.5px;padding:0}}
+main{max-width:1080px;margin:0 auto;padding:12px 14px calc(var(--nh) + 30px + env(safe-area-inset-bottom,0px))}
+@media(min-width:800px){
+nav{left:50%;right:auto;transform:translateX(-50%);bottom:14px;width:min(560px,calc(100% - 32px));border:1px solid var(--bd);border-radius:16px;padding-bottom:0}
+nav>a,nav>button{flex-direction:row;gap:8px;height:48px;font-size:13px}nav .ic{width:18px;height:18px}
+nav>.on::before{top:auto;bottom:0;left:22%;right:22%;border-radius:2px 2px 0 0}
+.more{right:0}main{padding:18px 28px 110px}.toast{bottom:78px!important}}
+/* tipografia */
+h2{margin:2px 0 10px;font-size:18px;font-weight:700}h3{margin:0 0 8px;font-size:15px}h4{margin:12px 0 6px;font-size:13px;color:var(--mu)}
+h2,h3,.card,.stat,.md>div{overflow-wrap:anywhere}.mu{color:var(--mu);font-size:13px}
+/* cartões */
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin-bottom:8px;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}.k4{grid-template-columns:repeat(2,1fr)}
+@media(min-width:640px){.k4{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:9px 12px;min-width:0}
+.stat b{display:block;font-size:clamp(18px,5.4vw,22px);line-height:1.2}.stat small{display:block;color:var(--mu);font-size:12px;line-height:1.3}
+.stat.al b{color:var(--er)}.stat.wn b{color:var(--o)}
+.stat[role=button],.wc{cursor:pointer}.stat[role=button]:hover,.wc:hover{border-color:var(--o)}
+details.mi{margin:12px 0 4px}details.mi>summary{cursor:pointer;color:var(--mu);font-size:13px;padding:4px 0}details.mi[open]>summary{margin-bottom:8px}
+/* botões e campos */
+.b{background:var(--o);color:#000;border:0;border-radius:8px;padding:6px 14px;min-height:38px;font-family:inherit;font-weight:600;font-size:13.5px;line-height:1.2;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:6px;max-width:100%}
+.b.g{background:transparent;color:var(--tx);border:1px solid var(--bd)}.b.r{background:#c62828;color:#fff}.b.s{padding:4px 10px;font-size:12.5px;min-height:32px}.b:disabled{opacity:.55;cursor:default}
+.badge{background:var(--o);color:#000;border-radius:99px;padding:0 6px;font-size:11px;font-weight:700}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}.row select{max-width:100%}
+.bar{display:flex;gap:8px;margin-bottom:10px}.bar input{flex:1;min-width:0}
+input,select,textarea{width:100%;min-height:38px;font:inherit;font-size:14.5px;padding:6px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--cd);color:var(--tx)}
+textarea{min-height:60px;resize:vertical}
+@media(pointer:coarse){input,select,textarea{min-height:44px;font-size:16px}.b{min-height:44px}.b.s{min-height:38px}}
+label{display:block;font-size:12.5px;color:var(--mu);margin:7px 0 2px}
+:focus-visible{outline:2px solid var(--o);outline-offset:2px}
+input:focus,select:focus,textarea:focus{border-color:var(--o);outline:2px solid color-mix(in srgb,var(--o) 35%,transparent);outline-offset:0}
+.inv,.inv:focus{border-color:var(--er)!important;outline-color:color-mix(in srgb,var(--er) 35%,transparent)}
+.er{color:var(--er);font-weight:600;margin:6px 0 0}.fe{display:block;color:var(--er);font-size:12.5px;font-weight:600;margin-top:3px;line-height:1.35}.fe:empty{display:none}.fe .b{margin-top:6px}
+.rq{color:var(--er);font-weight:700}.op{font-size:11.5px}
+/* etiquetas */
+.tag{display:inline-block;padding:1px 7px;border-radius:99px;font-size:11px;line-height:1.5;font-weight:600;background:#fde7d1;color:#8a4300;vertical-align:middle}
+.tag.v{background:#d9f2df;color:#14612a}.tag.x{background:#fadbd8;color:#8e1b12}.tag.y{background:#fff3c4;color:#7a5b00}.tag.bl{background:#dbe9fb;color:#12408a}.tag.n{background:#e6e6e4;color:#444}
+.split{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.split>div:first-child{flex:1;min-width:0}.split>div:last-child{flex:none;max-width:48%}
+/* grupos e lista de OS */
+.gh{margin:14px 0 6px;font-size:13px;padding-left:8px;border-left:3px solid var(--o)}h4.gh{margin:10px 0 6px;color:var(--tx)}
+.gh.x{border-color:#c62828;color:var(--er)}.gh.bl{border-color:#1f6fd1}.gh.n{border-color:#888}.gh.v{border-color:#2e8b4d}
+.wc{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:8px 12px;margin-bottom:6px}
+.wc.late{border-left:3px solid #c62828}.wc.soon{border-left:3px solid var(--o)}
+.w1{grid-column:1;grid-row:1}.w5{grid-column:2;grid-row:1;justify-self:end}
+.w2{grid-column:1/-1;grid-row:2;color:var(--mu);font-size:13px}.w6{grid-column:1/-1;grid-row:3;color:var(--mu);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.w3{grid-column:1;grid-row:4;font-size:13px}.w4{grid-column:2;grid-row:4;font-size:13px;justify-self:end;text-align:right;white-space:nowrap}
+.wc.mini .w6{display:none}.wc.mini .w3,.wc.mini .w4{grid-row:3}
+@media(min-width:900px){.wc{grid-template-columns:minmax(0,1.6fr) minmax(0,1.4fr) minmax(0,1fr) minmax(0,1.1fr) auto;grid-template-rows:auto auto;align-items:center;column-gap:16px}
+.w1{grid-column:1;grid-row:1}.w2{grid-column:1;grid-row:2}.w6{grid-column:2;grid-row:1/3;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.w3{grid-column:3;grid-row:1/3}.w4{grid-column:4;grid-row:1/3;justify-self:start;text-align:left}.w5{grid-column:5;grid-row:1/3}
+.wc.mini .w3,.wc.mini .w4{grid-row:1/3}}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(172px,1fr));gap:0 10px}.meta{margin:-2px 0 8px;min-height:0}
+.kan{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}.kan>div{min-width:220px;flex:1}
+.kv{display:grid;grid-template-columns:minmax(96px,34%) 1fr;gap:6px 12px;margin:8px 0}.kv dt{color:var(--mu);font-size:12.5px}.kv dd{margin:0}
+.hist{list-style:none;margin:0;padding:0}.hist li{border-left:3px solid var(--o);padding:2px 0 8px 10px}
+/* modais e formulários */
+.md{position:fixed;inset:0;background:#0009;z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.md>div{background:var(--cd);width:100%;max-width:560px;max-height:92vh;max-height:92dvh;overflow:auto;border-radius:14px 14px 0 0;padding:14px 14px calc(14px + env(safe-area-inset-bottom,0px));box-shadow:var(--sh)}
+@media(min-width:800px){.md{align-items:center}.md>div{border-radius:14px}}
+#f{display:grid;grid-template-columns:1fr;gap:0 12px}#f>.er,#f>.row{grid-column:1/-1}.fld{min-width:0}
+@media(min-width:520px){#f{grid-template-columns:1fr 1fr}.fld.full{grid-column:1/-1}}
+.it{display:grid;grid-template-columns:3fr 1fr 1.4fr auto;gap:6px;margin-bottom:6px}.it .d,.it .q,.it .v{min-width:0}
+@media(max-width:480px){.it{grid-template-columns:1fr 1.4fr auto;padding-bottom:8px;margin-bottom:8px;border-bottom:1px dashed var(--bd)}.it .d{grid-column:1/-1}.doc{font-size:13px;padding:10px}.doc td,.doc th{padding:5px 3px}}
+.doc{background:#fff;color:#000;padding:14px;border-radius:8px;overflow-x:auto}.doc img{height:60px}.doc table{width:100%;border-collapse:collapse;margin:10px 0}
+.doc td,.doc th{border-bottom:1px solid #ccc;padding:6px;text-align:left;overflow-wrap:anywhere}.doc .t{text-align:right}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nh) + 16px + env(safe-area-inset-bottom,0px));background:#111;color:#fff;border:1px solid var(--o);padding:9px 14px;border-radius:10px;z-index:30;max-width:90vw;font-size:13.5px}
+@media print{body *{visibility:hidden}.doc,.doc *{visibility:visible}.doc{position:absolute;left:0;top:0;width:100%}}
+.fld.off{display:none}
+.cr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:8px 12px;margin-bottom:6px;cursor:pointer}.cr:hover{border-color:var(--o)}
+.c1{grid-column:1;grid-row:1}.c5{grid-column:2;grid-row:1;justify-self:end}.c2{grid-column:1;grid-row:2;color:var(--mu);font-size:13px}.c4{grid-column:2;grid-row:2;justify-self:end}.c3{grid-column:1/-1;grid-row:3;color:var(--mu);font-size:12.5px}
+@media(min-width:900px){.cr{grid-template-columns:minmax(0,1.8fr) minmax(0,1.7fr) auto 130px;align-items:center;column-gap:16px}.c1{grid-column:1;grid-row:1}.c2{grid-column:1;grid-row:2}.c3{grid-column:2;grid-row:1/3}.c5{grid-column:3;grid-row:1/3}.c4{grid-column:4;grid-row:1/3;justify-self:end}}
+.seg{display:inline-flex;border:1px solid var(--bd);border-radius:8px;overflow:hidden}.seg button{background:none;border:0;border-right:1px solid var(--bd);padding:6px 12px;font:inherit;font-size:13px;font-weight:600;color:var(--mu);cursor:pointer;min-height:34px}.seg button:last-child{border-right:0}.seg button.on{background:var(--o);color:#000}
+.li{margin:0 0 8px;padding-left:20px}
+.wc.canc{opacity:.7}
+details.fin>summary{cursor:pointer;margin:14px 0 6px}details.fin>summary::marker{color:var(--mu)}
+</style>
+</head>
+<body>
+<header><img src="icons/logo.jpg" alt="Jessé Auto Couros e Capotas"><b>Jessé Auto Couros</b></header>
+<nav id="nav" aria-label="Navegação principal"></nav>
+<main id="app"></main>
+<script src="utils.js"></script>
+<script>
+/* ===== Dados (camada única: trocar load/save por chamadas à API Cloudflare no futuro) ===== */
+const KEY='jesse_v1',$=s=>document.querySelector(s);
+const ST={q:['Aprovado','Recusado'],
+o:['Em produção','Finalizado','Entregue'],
+s:['Em produção','Finalizado','Entregue']};
+const SERV=['Revestimento de bancos em couro','Reforma de bancos','Revestimento de volante','Forração de portas','Forração de teto','Confecção de capota marítima','Reforma de capota','Revestimento de painel'];
+const V=(marca,modelo,ano,placa)=>({marca,modelo,ano,placa});
+function ld(off){const d=new Date();if(off)d.setDate(d.getDate()+off);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function seed(){
+ const c=[['Carlos Menezes','(67) 99812-3344','529.982.247-25','Rua das Flores, 120'],['Ana Beatriz Souza','(67) 99123-4567','','Av. Afonso Pena, 800'],['Marcos Vinícius Lima','(67) 98456-1122','','Rua Bahia, 45'],['Náutica Pantanal Ltda','(67) 99321-9988','11.222.333/0001-81','Av. Gury Marques, 2000'],['Fernanda Ribeiro','(67) 99700-8899','','Rua Pedro Celestino, 310']].map((x,i)=>({id:'c'+(i+1),nome:x[0],tel:x[1],doc:x[2],end:x[3],obs:''}));
+ const e=(d,q,v)=>({d,q,v});
+ const q=[
+ ['c1',V('Toyota','Hilux','2019','QWE1A23'),[e(SERV[0],1,4800),e(SERV[2],1,450)],200,'Aprovado','2026-10-20'],
+ ['c2',V('Honda','Civic','2016','ABC1D34'),[e(SERV[1],1,1800),e(SERV[4],1,900)],0,'Aprovado','2026-10-25'],
+ ['c3',V('Jeep','Wrangler','2014','FGH2E45'),[e(SERV[5],1,3500)],150,'Aprovado','2026-11-02'],
+ ['c4',V('Chevrolet','S10','2021','JKL3F56'),[e(SERV[3],4,250),e(SERV[7],1,1200)],0,'Aprovado','2026-11-05'],
+ ['c5',V('Fiat','Toro','2020','MNO4G67'),[e(SERV[0],1,4200)],0,'Aguardando aprovação','2026-11-09'],
+ ['c1',V('Ford','Ka','2017','PQR5H78'),[e(SERV[6],1,1300)],0,'Rascunho','2026-11-11']
+ ].map((x,i)=>({id:'q'+(i+1),n:i+1,c:x[0],v:x[1],items:x[2],disc:x[3],status:x[4],date:x[5],obs:''}));
+ const o=[['q1','Em produção',1500,'PIX','2026-11-20'],['q2','Pedido recebido',500,'Cartão','2026-11-28'],['q3','Aguardando execução',1000,'PIX','2026-12-05'],['q4','Finalizado',0,'Dinheiro','2026-11-10']].map((x,i)=>({id:'o'+(i+1),n:i+1,q:x[0],status:x[1],entry:x[2],pay:x[3],due:x[4],obs:''}));
+ const s=[['Jessé Costa','(67) 99999-1111','Couro e bancos'],['Pedro Alves','','Capotas'],['Luiz Henrique','(67) 99888-2222','Forração e painéis']].map((x,i)=>({id:'s'+(i+1),nome:x[0],tel:x[1],esp:x[2],obs:'',ativo:true}));
+ const os=[['o1','s1','Em produção',-8,-1],['o1','s3','Em produção',0,2],['o2','s3','Em produção',0,14],['o3','s2','Finalizado',-2,21],['o4','s1','Entregue',-10,-3]].map((x,i)=>({id:'w'+(i+1),n:i+1,o:x[0],s:x[1],status:x[2],date:ld(x[3]),due:ld(x[4]),delivered:x[2]=='Entregue'?ld(-3):'',desc:'Executar conforme orçamento.',obs:'',hist:[{at:new Date().toISOString(),kind:'status',from:'',to:x[2],by:'Administração',note:'Registro demonstrativo'}]}));
+ const d={c,q,o,s,w:os};d.q[4].status='';d.q[5].status='Recusado';d.q.forEach(x=>{if(d.o.some(y=>y.q==x.id))x.conv=true});d.o.forEach(y=>{if(y.status=='Pedido recebido'||y.status=='Aguardando execução')y.status='Em produção'});migrate(d);delete d.mig;delete d.migs;return d;
+}
+/* Migração 1.2: cada pedido guarda cópia independente dos dados do orçamento. Segura para rodar várias vezes. */
+function migrate(d){let n=0;d.o.forEach(o=>{if(Array.isArray(o.items))return;const q=d.q.find(x=>x.id==o.q);if(!q)return;const c=d.c.find(x=>x.id==q.c);o.c=q.c;o.cnome=c?c.nome:'';o.ctel=c?c.tel:'';o.v={...q.v};o.items=q.items.map(i=>({...i}));o.disc=q.disc||0;o.qn=q.n;n++});
+ /* só padroniza o formato de valores VÁLIDOS; valores inválidos antigos ficam como estão */
+ d.c.forEach(c=>{if(c.tel&&JU.validPhone(c.tel))c.tel=JU.fmtPhone(c.tel);if(c.doc&&JU.validDoc(c.doc))c.doc=JU.fmtDoc(c.doc)});d.s.forEach(s=>{if(s.tel&&JU.validPhone(s.tel))s.tel=JU.fmtPhone(s.tel)});
+ [...d.q,...d.o].forEach(x=>{if(x.v&&x.v.placa&&JU.validPlate(x.v.placa))x.v.placa=JU.fmtPlate(x.v.placa);if(x.ctel&&JU.validPhone(x.ctel))x.ctel=JU.fmtPhone(x.ctel)});
+ /* v1.4: status novos + histórico das OS. Só preenche o que falta (idempotente); nunca apaga. */
+ const LEG={'Concluída':'Pronto para entrega','Pausada':'Em execução'};let nw=0,mp=0;
+ d.w.forEach(w=>{if(!w.date&&w.start)w.date=w.start;if(Array.isArray(w.hist))return;const old=w.status;if(LEG[old]){w.status=LEG[old];mp++}
+  w.hist=[{at:new Date().toISOString(),kind:'status',from:'',to:w.status,by:'Administração',note:'Histórico iniciado na versão 1.4'+(LEG[old]?'. Status anterior: '+old:'')}];nw++});
+ if(nw)d.migw={n:nw,mapped:mp,at:new Date().toLocaleDateString('pt-BR')};
+ /* v1.5.1: status simplificados + orçamentos já convertidos. Só converte valores antigos (o original fica em st0); nunca apaga nem cria pedidos. */
+ const LQ={'Rascunho':'','Aguardando aprovação':'','Cancelado':'Recusado'},LO={'Pedido recebido':'Em produção','Aguardando execução':'Em produção'};let nq=0,no=0,nc=0;
+ d.q.forEach(q=>{if(LQ[q.status]!==undefined){q.st0=q.st0||q.status;q.status=LQ[q.status];nq++}if(!q.conv&&d.o.some(o=>o.q==q.id)){q.conv=true;nc++}});
+ d.o.forEach(o=>{if(LO[o.status]){o.st0=o.st0||o.status;o.status=LO[o.status];no++}});
+ if(nq||no||nc)d.migs={q:nq,o:no,conv:nc,at:new Date().toLocaleDateString('pt-BR')};
+ /* v1.5.3: OS com 3 status (Em produção/Finalizado/Entregue). Cancelada = Finalizado + marca "canc". Só converte status antigo, registra a migração UMA vez no histórico e nunca apaga. */
+ const LW={'Aguardando início':'Em produção','Em execução':'Em produção','Aguardando material':'Em produção','Aguardando conferência':'Em produção','Pronto para entrega':'Finalizado','Cancelado':'Finalizado'};let nw3=0,nc3=0;
+ d.w.forEach(w=>{const old=w.status;if(!LW[old])return;w.st0=w.st0||old;w.status=LW[old];if(old=='Cancelado'){w.canc=true;nc3++}
+  (w.hist=w.hist||[]).push({at:new Date().toISOString(),kind:'status',from:old,to:w.status,by:'Sistema (migração)',note:old=='Cancelado'?'Status simplificado na versão 1.5.3: OS cancelada preservada como Finalizado com a identificação "Cancelada"':'Status simplificado na versão 1.5.3'});nw3++});
+ if(nw3)d.migo={n:nw3,canc:nc3,at:new Date().toLocaleDateString('pt-BR')};
+ d.ver=6;d.pend=d.o.filter(o=>!Array.isArray(o.items)).map(o=>o.n);if(n)d.mig={n,at:new Date().toLocaleDateString('pt-BR')};return n}
+let D=null;try{D=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}D=D||seed();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D));return true}catch(e){return false}};
+{const raw=localStorage.getItem(KEY),b0=JSON.stringify(D);
+ /* cópia de segurança dos dados da v1.3 antes da primeira migração */
+ {const bkk=(D.ver||0)<3?KEY+'_backup_v1.3':(D.ver||0)<4?KEY+'_backup_v1.4.1':(D.ver||0)<5?KEY+'_backup_v1.5':(D.ver||0)<6?KEY+'_backup_v1.5.2':'';if(raw&&bkk){try{if(!localStorage.getItem(bkk))localStorage.setItem(bkk,raw)}catch(e){}}}
+ try{const c=JSON.parse(b0);migrate(c);D=c}catch(e){console.error('Falha na migração',e);window.__migErr=String(e)}
+ if(JSON.stringify(D)!==b0)save()}
+let UI={f:'',mode:'lista'};
+/* ===== Utilidades ===== */
+const esc=t=>String(t??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const R$=n=>(+n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const uid=p=>p+Date.now().toString(36)+Math.floor(Math.random()*99);
+const nxt=a=>Math.max(0,...a.map(x=>x.n))+1;
+const dt=d=>d?d.split('-').reverse().join('/'):'—';
+const today=()=>ld(0);
+const get=(a,id)=>D[a].find(x=>x.id===id);
+const cn=id=>get('c',id)?.nome||'(cliente removido)';
+const cents=x=>Math.round((+x||0)*100),line=i=>Math.round((+i.q||0)*cents(i.v));
+const sub=q=>q.items.reduce((a,i)=>a+line(i),0)/100,tot=q=>Math.max(0,sub(q)*100-cents(q.disc))/100;
+const EQ={c:'',v:{},items:[],disc:0},qo=o=>o.items?o:(get('q',o.q)||EQ),onm=q=>q.cnome||cn(q.c);
+const vtxt=v=>[v.marca,v.modelo,v.ano].filter(Boolean).join(' ')+(v.placa?' · '+v.placa:'');
+const tag=s=>`<span class="tag ${/Aprovado|Concluída|Finalizado|Entregue/.test(s)?'v':/Recusado|Cancelado/.test(s)?'x':/Em produção/.test(s)?'bl':/Aguard|Pausada|Rascunho/.test(s)?'y':''}">${esc(s)}</span>`;
+const opts=(l,v)=>l.map(x=>{const [a,b]=Array.isArray(x)?x:[x,x];return`<option value="${esc(a)}" ${a==v?'selected':''}>${esc(b)}</option>`}).join('');
+const match=(...t)=>t.join(' ').toLowerCase().includes(UI.f.toLowerCase());
+const search=ph=>`<input placeholder="${ph||'Pesquisar'}" aria-label="${ph||'Pesquisar'}" value="${esc(UI.f)}" oninput="UI.f=this.value;R(1)" id="sq" style="flex:1;min-width:150px">`;
+/* ===== Modais ===== */
+function modal(h){closeM();const m=document.createElement('div');m.className='md';m.id='md';m.innerHTML='<div>'+h+'</div>';m.onclick=e=>{if(e.target===m)closeM()};document.body.appendChild(m)}
+const closeM=()=>$('#md')?.remove();
+function ask(msg,fn){modal(`<h3>${esc(msg)}</h3><div class=row><button class="b g" onclick=closeM()>Cancelar</button><button class="b r" id=yes>Confirmar</button></div>`);$('#yes').onclick=()=>{fn();closeM();save();R()}}
+function field(f,v){const x=v[f.k]??f.d??'';
+ if(f.t=='items')return`<div class="fld full"><label>Serviços <span class=rq title="Obrigatório">*</span></label><div id=its>${(v.items||[{}]).map(itRow).join('')}</div><button type=button class="b g s" onclick="its.insertAdjacentHTML('beforeend',itRow({}))">+ Adicionar serviço</button><datalist id=sv>${SERV.map(s=>`<option value="${esc(s)}">`).join('')}</datalist><p class=mu id=tt></p></div>`;
+ const id=`i-${f.k}`,lb=f.l.replace(/\s*\(opcional\)/i,''),tg=f.r?' <span class=rq title="Obrigatório">*</span>':(f.t=='select'?'':' <span class=op>(opcional)</span>');
+ const i=f.t=='select'?`<select id=${id} name=${f.k} ${f.dis?'disabled':''}>${opts(f.o,x)}</select>`:f.t=='textarea'?`<textarea id=${id} name=${f.k} rows=2>${esc(x)}</textarea>`:`<input id=${id} name=${f.k} type="${f.m?'text':f.t||'text'}" ${f.m?`data-m=${f.m}`:''} value="${esc(f.m?JU.norm(f.m,x):x)}" ${f.step?'step=any':''} ${f.t=='number'?'min=0':''} ${f.k=='disc'||f.k=='entry'?'oninput=calc()':''}>`;
+ return`<div class="fld${f.t=='textarea'||['nome','end','c','obs','desc','tipo'].includes(f.k)?' full':''}" ${f.g?`data-g=${f.g}`:''}><label for=${id}>${lb}${tg}</label>${i}<small class=fe id=e-${f.k} role=alert></small></div>`}
+const itRow=i=>`<div class=it><input class=d list=sv aria-label="Serviço" placeholder="Serviço" value="${esc(i.d||'')}"><input class=q type=number min=0 aria-label="Quantidade" placeholder="Qtd" value="${i.q??1}" oninput=calc()><input class=v type=number min=0 step=any aria-label="Valor unitário" placeholder="R$ unit." value="${i.v??''}" oninput=calc()><button type=button class="b g s" title="Remover serviço" aria-label="Remover serviço" onclick="rmIt(this)">✕</button></div>`;
+const rmIt=b=>{b.closest('.it').remove();calc()};
+function readIts(){return[...document.querySelectorAll('#its .it')].map(r=>({d:r.querySelector('.d').value,q:+r.querySelector('.q').value||0,v:+r.querySelector('.v').value||0})).filter(i=>i.d||i.v)}
+function calc(){const t=$('#tt');if(!t)return;const s=readIts().reduce((a,i)=>a+line(i),0),d=cents(document.querySelector('[name=disc]')?.value),fin=Math.max(0,s-d),isO=document.querySelector('[name=tipo]')?.value=='o';
+ let h=`Subtotal ${R$(s/100)} · <b>Valor final ${R$(fin/100)}</b>${d>s?' · <span class=er>⚠ desconto maior que o total</span>':''}`;
+ if(isO){const e=cents(document.querySelector('[name=entry]')?.value);h+=`<br>Entrada ${R$(e/100)} · <b>Saldo restante ${R$((fin-e)/100)}</b>${e>fin?' · <span class=er>⚠ entrada maior que o valor</span>':''}`}t.innerHTML=h}
+function showErr(k,m,act){const e=$('#e-'+k),el=$('#i-'+k);if(!e)return;e.innerHTML=m?esc(m)+(act?` <button type=button class="b g s" id=eact>${esc(act.t)}</button>`:''):'';
+ if(el){el.classList.toggle('inv',!!m);m?el.setAttribute('aria-invalid','true'):el.removeAttribute('aria-invalid')}if(act&&m)$('#eact').onclick=act.fn}
+function toast(m){const t=document.createElement('div');t.className='toast';t.setAttribute('role','status');t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2200)}
+function form(title,fs,v,cb,val){modal(`<h3>${title}</h3><form id=f novalidate>${fs.map(f=>field(f,v)).join('')}<p class=er id=err role=alert></p><div class=row><button type=button class="b g" onclick=closeM()>Cancelar</button><button class=b id=sv2>Salvar</button></div></form>`);calc();
+ const F=$('#f'),btn=$('#sv2');F.querySelectorAll('[data-m]').forEach(el=>JU.attach(el,el.dataset.m));
+ const tg=()=>{const t=F.elements['tipo']?.value;if(!t)return;F.querySelectorAll('.fld[data-g]').forEach(e=>e.classList.toggle('off',e.dataset.g!==t));calc()};if(F.elements['tipo']){F.elements['tipo'].addEventListener('change',tg);tg()}
+ {const fi=F.querySelector('input,textarea');if(fi&&matchMedia('(pointer:fine)').matches)fi.focus()}
+ F.addEventListener('input',e=>{if(e.target.name)showErr(e.target.name,'');$('#err').textContent=''});
+ F.onsubmit=e=>{e.preventDefault();if(F.__busy)return;F.__busy=1;btn.disabled=true;const fail=()=>{F.__busy=0;btn.disabled=false};
+  let bad=null;const o={};
+  fs.forEach(f=>{if(f.t=='items'){o.items=readIts();return}const el=F.elements[f.k],raw=(el.value||'').trim();let msg='';
+   if(f.r&&!raw)msg='Preencha este campo para continuar.';
+   else if(f.m&&raw&&!(v[f.k]&&JU.norm(f.m,v[f.k])===JU.norm(f.m,raw)))msg=JU.check(f.m,raw); /* valor antigo e não alterado é aceito */
+   showErr(f.k,msg);if(msg&&!bad)bad=el;o[f.k]=f.t=='number'?+el.value:f.m?JU.norm(f.m,raw):el.value});
+  if(bad){bad.focus();bad.scrollIntoView({block:'center'});fail();return}
+  const er=val&&val(o);if(er){if(typeof er=='object'){showErr(er.k,er.msg,er.act);F.elements[er.k]?.focus()}else $('#err').textContent=er;fail();return}
+  cb(o);save();closeM();toast('Salvo com sucesso.');R()}}
+/* ===== Clientes ===== */
+const CF=[{k:'nome',l:'Nome completo',r:1},{k:'tel',l:'Telefone / WhatsApp',m:'phone'},{k:'doc',l:'CPF ou CNPJ',m:'doc'},{k:'end',l:'Endereço (opcional)'},{k:'obs',l:'Observações',t:'textarea'}];
+const seeC=c=>{closeM();const go=()=>{UI.f=c.nome;R()};if(cur=='clients')go();else{location.hash='clients';setTimeout(go,60)}};
+const dupDoc=id=>o=>{const k=JU.docKey(o.doc);if(!k)return;const d=D.c.find(c=>c.id!=id&&JU.docKey(c.doc)===k);
+ if(d)return{k:'doc',msg:`Já existe um cliente cadastrado com este ${JU.docKind(o.doc)==='cnpj'?'CNPJ':'CPF'}: ${d.nome}.`,act:{t:'Ver cadastro existente',fn:()=>seeC(d)}}};
+function editC(id){const c=id?get('c',id):{};form(id?'Editar cliente':'Novo cliente',CF,c,o=>{id?Object.assign(c,o):D.c.push({id:uid('c'),...o})},dupDoc(id))}
+const delC=id=>{const n=D.q.filter(q=>q.c==id).length+D.o.filter(o=>o.c==id).length;if(n)return info(`Este cliente tem ${n} orçamento(s)/pedido(s) vinculado(s). Exclua-os antes de excluir o cliente.`);ask('Excluir este cliente?',()=>D.c=D.c.filter(c=>c.id!=id))};
+function histC(id){const qs=D.q.filter(x=>x.c==id),dir=D.o.filter(o=>o.c==id&&!D.q.some(x=>x.id==o.q)),osl=od=>od?D.w.filter(w=>w.o==od.id).map(w=>`<br>OS #${w.n} ${wst(w)}`).join(''):'';
+ modal(`<h3>Histórico · ${esc(cn(id))}</h3>${qs.map(x=>{const od=D.o.find(o=>o.q==x.id);return`<div class=card><b>Orçamento #${x.n}</b> ${qtag(x.status)}<br><span class=mu>${esc(vtxt(x.v))} · ${R$(tot(x))}</span>${od?`<br>Pedido #${od.n} ${tag(od.status)}`:''}${osl(od)}</div>`}).join('')}${dir.map(od=>`<div class=card><b>Pedido #${od.n}</b> ${tag(od.status)}<br><span class=mu>${esc(vtxt(od.v))} · ${R$(tot(od))}</span>${osl(od)}</div>`).join('')}${qs.length||dir.length?'':'<p class=mu>Sem histórico.</p>'}<button class="b g" onclick=closeM()>Fechar</button>`)}
+const vClients=()=>`<h2>Clientes</h2><div class=bar>${search()}<button class=b onclick=editC()>+ Novo cliente</button></div>`+(D.c.filter(c=>match(c.nome,c.tel)).map(c=>`<div class=card><div class=split><div><b>${esc(c.nome)}</b><br><span class=mu>${esc(c.tel)} ${c.doc?'· '+esc(c.doc):''}<br>${esc(c.end||'')}</span></div></div><div class=row><button class="b g s" onclick="histC('${c.id}')">Histórico (${D.q.filter(q=>q.c==c.id).length+D.o.filter(o=>o.c==c.id&&!D.q.some(x=>x.id==o.q)).length})</button><button class="b g s" onclick="editC('${c.id}')">Editar</button><button class="b g s" onclick="delC('${c.id}')">Excluir</button></div></div>`).join('')||`<p class=mu>${D.c.length?'Nenhum cliente encontrado.':'Nenhum cliente cadastrado ainda.'}</p>`);
+/* ===== Orçamentos ===== */
+const info=m=>modal(`<p>${esc(m)}</p><div class=row><button class=b onclick=closeM()>Entendi</button></div>`);
+const dupQ=id=>{const q=get('q',id),n={...q,id:uid('q'),n:nxt(D.q),date:today(),status:'',items:q.items.map(i=>({...i})),v:{...q.v}};delete n.conv;delete n.st0;D.q.push(n);save();R();toast('Orçamento duplicado.');openDoc('q',n.id)};
+function docQ(id){const q=get('q',id),c=get('c',q.c)||{};modal(`<div class=doc><img src="icons/logo.jpg"><h3>Orçamento nº ${q.n}</h3><p>Data: ${dt(q.date)}<br>Cliente: <b>${esc(c.nome)}</b> ${esc(c.tel||'')}<br>Veículo: ${esc(vtxt(q.v))}</p><table><tr><th>Serviço</th><th class=t>Qtd</th><th class=t>Unit.</th><th class=t>Total</th></tr>${q.items.map(i=>`<tr><td>${esc(i.d)}</td><td class=t>${i.q}</td><td class=t>${R$(i.v)}</td><td class=t>${R$(i.q*i.v)}</td></tr>`).join('')}</table><p class=t>Subtotal: ${R$(sub(q))}<br>Desconto: ${R$(q.disc)}<br><b style="font-size:18px">Total: ${R$(tot(q))}</b></p><p>${esc(q.obs||'')}</p><small>Jessé Auto Couros e Capotas · Serviço em couro para toda linha automotiva.</small></div><div class=row><button class=b onclick="print()">Imprimir / Salvar PDF</button><button class="b g" onclick="wa('${q.id}')">WhatsApp</button><button class="b g" onclick=closeM()>Fechar</button></div>`)}
+function wa(id){const q=get('q',id),c=get('c',q.c)||{};const t=`*Jessé Auto Couros e Capotas*\nOrçamento nº ${q.n}\n\nCliente: ${c.nome}\nVeículo: ${vtxt(q.v)}\n\n*Serviços*\n${q.items.map(i=>`• ${i.d} (${i.q}x ${R$(i.v)})`).join('\n')}\n\n*Total: ${R$(tot(q))}*${q.obs?'\nObs: '+q.obs:''}`;
+ const p=(c.tel||'').replace(/\D/g,'');open(`https://wa.me/${p?(p.length>=12&&p.startsWith('55')?p:'55'+p):''}?text=${encodeURIComponent(t)}`,'_blank')}
+const delQ=id=>{const o=D.o.find(o=>o.q==id);if(o)return info(`Este orçamento gerou o Pedido #${o.n}. Exclua o pedido antes.`);ask('Excluir este orçamento?',()=>D.q=D.q.filter(q=>q.id!=id))};
+/* ===== Pedidos ===== */
+const OF=[{k:'entry',l:'Valor de entrada (R$)',t:'number',step:1},{k:'pay',l:'Forma de pagamento'},{k:'due',l:'Data prevista de entrega',t:'date'},{k:'status',l:'Status',t:'select',o:ST.o},{k:'obs',l:'Observações',t:'textarea'}];
+const vO=tf=>o=>{const t=tf();if(o.entry<0)return'A entrada não pode ser negativa.';if(cents(o.entry)>cents(t))return'A entrada não pode ser maior que o valor contratado ('+R$(t)+').'};
+function newO(qid){const q=get('q',qid);if(!q||q.status!='Aprovado')return info('Só é possível gerar pedido de orçamento aprovado.');if(D.o.some(o=>o.q==qid))return info('Este orçamento já tem pedido.');const c=get('c',q.c)||{};
+ form('Novo pedido',OF,{entry:0,status:'Em produção',obs:q.obs||''},o=>{const x={id:uid('o'),n:nxt(D.o),q:qid,qn:q.n,date:today(),c:q.c,cnome:c.nome||'',ctel:c.tel||'',v:{...q.v},items:q.items.map(i=>({...i})),disc:q.disc||0,...o};D.o.push(x);setTimeout(()=>openDoc('o',x.id),0)},vO(()=>tot(q)))}
+const delO=id=>{const w=D.w.filter(w=>w.o==id);if(w.length)return info(`Este pedido tem ${w.length} OS vinculada(s) (#${w.map(x=>x.n).join(', #')}). Exclua as OS antes.`);ask('Excluir este pedido?',()=>D.o=D.o.filter(o=>o.id!=id))};
+/* ===== Comercial: orçamentos e pedidos numa só tela ===== */
+const CM0={tipo:'',st:''};let CM={...CM0};
+const setCM=(k,v)=>{CM[k]=v;if(k=='tipo')CM.st='';R()},clrCM=()=>{CM={...CM0};UI.f='';R()};
+const fCom=o=>{CM={...CM0,...o};UI.f='';if(location.hash=='#com')R();else location.hash='com'};
+const docDate=(k,d)=>d.date||(d.q&&get('q',d.q)?.date)||'';
+/* status: orçamento = Aprovado/Recusado (sem decisão = ainda aguardando o cliente); pedido = Em produção/Finalizado/Entregue */
+const stList=(k,cur)=>{const l=k=='q'?ST.q:ST.o;return cur&&!l.includes(cur)?[...l,cur]:l};
+const qOpts=cur=>[...(cur?[]:[['','Sem decisão (aguardando o cliente)']]),...stList('q',cur).map(s=>[s,s])];
+const qtag=s=>s?tag(s):'<span class="tag n">Sem decisão</span>';
+const stOpts=()=>{const q=[['q:_none','Orçamento · Sem decisão'],...ST.q.map(s=>['q:'+s,'Orçamento · '+s])],o=ST.o.map(s=>['o:'+s,'Pedido · '+s]);return[['','Todos os status'],...(CM.tipo=='q'?q:CM.tipo=='o'?o:[...q,...o])]};
+function docsList(){const t=nz(UI.f);
+ return[...D.q.filter(q=>!q.conv).map(d=>({k:'q',d})),...D.o.map(d=>({k:'o',d}))].filter(({k,d})=>{if(CM.tipo&&k!=CM.tipo)return false;
+  if(CM.st){const i=CM.st.indexOf(':'),tk=CM.st.slice(0,i),sv=CM.st.slice(i+1);if(tk!=k)return false;if(sv=='_none'?!!d.status:d.status!=sv)return false}
+  const q=qo(d);return !t||nz(onm(q)+' '+(q.v.placa||'')+' '+d.n).includes(t)})
+ .sort((a,b)=>{const x=docDate(a.k,a.d),y=docDate(b.k,b.d);return x<y?1:x>y?-1:a.k!=b.k?(a.k=='o'?-1:1):b.d.n-a.d.n})}
+const openDocKey=(k,id)=>`onclick="openDoc('${k}','${id}')" onkeydown="if(event.key=='Enter'||event.key==' '){event.preventDefault();openDoc('${k}','${id}')}" role=button tabindex=0`;
+const dRow=(k,d)=>{const q=qo(d),t=tot(q),ws=k=='o'?D.w.filter(w=>w.o==d.id):[],orq=k=='o'?(d.qn||get('q',d.q)?.n):'';
+ const sub=k=='q'?`${dshort(d.date)}`:`Entrega ${dshort(d.due)} · Entrada ${R$(d.entry)} · Saldo ${R$((cents(t)-cents(d.entry))/100)}${orq?` · Orç. #${orq}`:''}${ws.length?` · ${ws.length} OS`:''}`;
+ return`<div class="card cr" ${openDocKey(k,d.id)}><div class=c1><span class="tag ${k=='q'?'n':''}">${k=='q'?'Orçamento':'Pedido'}</span> <b>#${d.n} · ${esc(onm(q))}</b></div><div class=c5><b>${R$(t)}</b></div><div class=c2>${esc(vtxt(q.v)||'—')}</div><div class=c4>${k=='q'?qtag(d.status):tag(d.status)}</div><div class=c3>${sub}</div></div>`};
+function vCom(){const L=docsList(),na=(CM.tipo?1:0)+(CM.st?1:0)+(UI.f?1:0);
+ return`<div class=split style="align-items:center"><h2>Comercial</h2><button class="b s" onclick="newDoc()">+ Novo</button></div>
+<div class=bar>${search('Cliente, placa ou número')}</div>
+<div class=row style="margin:0 0 8px"><div class=seg role=group aria-label="Tipo de documento">${[['','Todos'],['q','Orçamentos'],['o','Pedidos']].map(([v,l])=>`<button type=button class="${CM.tipo==v?'on':''}" aria-pressed="${CM.tipo==v}" onclick="setCM('tipo','${v}')">${l}</button>`).join('')}</div><select style="width:auto;flex:1;min-width:150px" aria-label="Status" id=cst onchange="setCM('st',this.value)">${opts(stOpts(),CM.st)}</select></div>
+<div class="row meta"><span class=mu>${L.length} documento(s)</span>${na?`<button class="b g s" onclick=clrCM()>Limpar filtros</button>`:''}</div>`
+ +(L.length?L.map(x=>dRow(x.k,x.d)).join(''):`<div class=card>${D.q.some(q=>!q.conv)||D.o.length?'Nenhum documento encontrado.':'Nenhum orçamento ou pedido ainda.<br><span class=mu>Toque em “+ Novo” para começar.</span>'}</div>`)}
+/* aprovação: cria o pedido (cópia independente) e retira o orçamento da lista ativa. Seguro contra falha e duplicidade. */
+const converting=new Set();
+function approveQuote(q){if(!q||converting.has(q.id))return null;
+ const ex=D.o.find(o=>o.q==q.id);if(ex){if(!q.conv||q.status!='Aprovado'){q.conv=true;q.status='Aprovado';save()}return ex}
+ converting.add(q.id);const snap=JSON.stringify(q),c=get('c',q.c)||{};
+ const ord={id:uid('o'),n:nxt(D.o),q:q.id,qn:q.n,date:today(),c:q.c,cnome:c.nome||'',ctel:c.tel||'',v:{...q.v},items:q.items.map(i=>({...i})),disc:q.disc||0,entry:0,pay:'',due:'',status:'Em produção',obs:q.obs||''};
+ try{D.o.push(ord);q.status='Aprovado';q.conv=true;if(!save())throw new Error('falha ao salvar');return ord}
+ catch(e){const i=D.o.indexOf(ord);if(i>=0)D.o.splice(i,1);Object.keys(q).forEach(k=>delete q[k]);Object.assign(q,JSON.parse(snap));return null}
+ finally{converting.delete(q.id)}}
+const okApprove=ord=>{R();toast('Orçamento aprovado. Pedido #'+ord.n+' criado.');openDoc('o',ord.id)};
+const failApprove=()=>info('Não foi possível converter o orçamento em pedido. O orçamento foi mantido sem alterações; tente novamente.');
+/* formulário único: o tipo escolhido define os campos específicos */
+function newDoc(kind){if(!D.c.length){modal(`<h3>Cadastre um cliente primeiro</h3><p>Orçamentos e pedidos precisam de um cliente.</p><div class=row><button class="b g" onclick=closeM()>Agora não</button><button class=b onclick="closeM();editC()">Cadastrar cliente</button></div>`);return}docForm(kind||CM.tipo||'q')}
+const vDoc=(kind,id)=>o=>{if(!D.c.length)return'Cadastre um cliente primeiro.';if(!o.items.length)return'Adicione ao menos um serviço.';if(o.items.some(i=>i.q<=0||i.v<0))return'A quantidade deve ser maior que zero e os valores não podem ser negativos.';
+ const s=o.items.reduce((a,i)=>a+line(i),0);if(o.disc<0)return{k:'disc',msg:'O desconto não pode ser negativo.'};if(cents(o.disc)>s)return{k:'disc',msg:'O desconto não pode ser maior que o valor total ('+R$(s/100)+').'};
+ if(o.tipo=='o'){const fin=s-cents(o.disc);if(o.entry<0)return{k:'entry',msg:'A entrada não pode ser negativa.'};if(cents(o.entry)>fin)return{k:'entry',msg:'A entrada não pode ser maior que o valor contratado ('+R$(fin/100)+').'}}};
+function docForm(kind,id){const d=id?get(kind,id):null;
+ if(d&&!Array.isArray(d.items)&&kind=='o')return info('Este pedido antigo não pôde ser migrado (o orçamento original não foi encontrado). Os dados foram preservados, mas ele não pode ser editado.');
+ if(d&&kind=='q'&&d.conv)return info('Este orçamento já virou pedido e não pode mais ser editado. Edite o pedido.');
+ const src=d?qo(d):{},isQ=kind=='q',v={tipo:kind,c:d?d.c:D.c[0].id,marca:src.v?.marca||'',modelo:src.v?.modelo||'',ano:src.v?.ano||'',placa:src.v?.placa||'',items:d?src.items:[{}],disc:d?(src.disc||0):0,obs:d?(d.obs||''):'',
+  qstatus:isQ&&d?d.status:'',ostatus:!isQ&&d?d.status:'Em produção',entry:!isQ&&d?(d.entry||0):0,pay:!isQ&&d?(d.pay||''):'',due:!isQ&&d?(d.due||''):''};
+ form(d?`${isQ?'Orçamento':'Pedido'} #${d.n}`:'Novo documento',[{k:'tipo',l:'Tipo de documento',t:'select',o:[['q','Orçamento'],['o','Pedido']],dis:!!d},{k:'c',l:'Cliente',t:'select',o:D.c.map(c=>[c.id,c.nome])},{k:'marca',l:'Marca'},{k:'modelo',l:'Modelo'},{k:'ano',l:'Ano'},{k:'placa',l:'Placa',m:'plate'},{t:'items'},{k:'disc',l:'Desconto (R$)',t:'number',step:1},
+  {k:'qstatus',l:'Status do orçamento',t:'select',o:qOpts(v.qstatus),g:'q'},{k:'ostatus',l:'Status do pedido',t:'select',o:stList('o',v.ostatus).map(s=>[s,s]),g:'o'},{k:'entry',l:'Valor de entrada (R$)',t:'number',step:1,g:'o'},{k:'pay',l:'Forma de pagamento',g:'o'},{k:'due',l:'Data prevista de entrega',t:'date',g:'o'},{k:'obs',l:'Observações',t:'textarea'}],v,o=>{
+  const veh=V(o.marca,o.modelo,o.ano,(o.placa||'').toUpperCase());let t,n,res=null,failed=false;
+  if(o.tipo=='q'){const wantApprove=o.qstatus=='Aprovado'&&!(d&&d.status=='Aprovado');
+   const b={c:o.c,v:veh,items:o.items,disc:o.disc,status:wantApprove?(d?d.status:''):o.qstatus,obs:o.obs};
+   if(d)Object.assign(d,b);else{n={id:uid('q'),n:nxt(D.q),date:today(),...b};D.q.push(n)}t=d||n;
+   if(wantApprove){res=approveQuote(t);if(!res)failed=true}}
+  else{const cl=get('c',o.c)||{},b={v:veh,items:o.items,disc:o.disc,entry:o.entry,pay:o.pay,due:o.due,status:o.ostatus,obs:o.obs};
+   if(d){Object.assign(d,b);if(o.c!==d.c){d.c=o.c;d.cnome=cl.nome||'';d.ctel=cl.tel||''}}else{n={id:uid('o'),n:nxt(D.o),q:'',date:today(),c:o.c,cnome:cl.nome||'',ctel:cl.tel||'',...b};D.o.push(n)}t=d||n}
+  setTimeout(()=>{if(res)okApprove(res);else{openDoc(o.tipo,t.id);if(failed)failApprove()}},0)},vDoc(kind,id))}
+const chDoc=(k,id,s)=>{const d=get(k,id);if(!d)return;
+ if(k=='q'&&s=='Aprovado'&&!d.conv){const ord=approveQuote(d);if(ord)okApprove(ord);else{R();openDoc('q',id);failApprove()}return}
+ if(k=='q'&&d.conv)return;
+ d.status=s;save();R();openDoc(k,id)};
+/* detalhe do documento */
+function openDoc(k,id){const d=get(k,id);if(!d)return;const q=qo(d),t=tot(q),isQ=k=='q',od=isQ?D.o.find(o=>o.q==id):null,ws=isQ?[]:D.w.filter(w=>w.o==id),tel=isQ?(get('c',q.c)?.tel||''):(d.ctel||get('c',d.c)?.tel||''),origin=!isQ&&d.q?get('q',d.q):null,conv=isQ&&d.conv;
+ modal(`<div class=split><h3>${isQ?'Orçamento':'Pedido'} #${d.n}</h3><div>${isQ?qtag(d.status):tag(d.status)}</div></div><dl class=kv>
+<dt>Cliente</dt><dd>${esc(onm(q))}${tel?`<br><span class=mu>${esc(tel)}</span>`:''}</dd>
+<dt>Veículo</dt><dd>${esc(vtxt(q.v)||'—')}</dd>
+<dt>Serviços</dt><dd>${q.items.map(i=>`${i.q}× ${esc(i.d)} — ${R$(i.q*i.v)}`).join('<br>')||'—'}</dd>
+<dt>Valores</dt><dd>Subtotal ${R$(sub(q))}${q.disc?` · Desconto ${R$(q.disc)}`:''}<br><b>Total ${R$(t)}</b>${isQ?'':`<br>Entrada ${R$(d.entry)} · <b>Saldo ${R$((cents(t)-cents(d.entry))/100)}</b>`}</dd>
+${isQ?`<dt>Data</dt><dd>${dt(d.date)}</dd>`:`<dt>Pagamento</dt><dd>${esc(d.pay||'—')}</dd><dt>Previsão de entrega</dt><dd>${dt(d.due)}</dd>`}
+<dt>Observações</dt><dd>${esc(d.obs||'—')}</dd>
+<dt>${isQ?'Pedido':'Origem'}</dt><dd>${isQ?(od?`<button class="b g s" onclick="openDoc('o','${od.id}')">Pedido #${od.n}</button>`:'Ainda sem pedido'):(d.q?(origin?`<button class="b g s" onclick="openDoc('q','${origin.id}')">Orçamento #${origin.n}</button>`:`Orçamento #${d.qn||''} (indisponível)`):'Pedido criado diretamente')}</dd></dl>
+${conv?'<p class=mu>Este orçamento já foi aprovado e virou pedido. Fica guardado só para consulta.</p>':`<label for=ds>Alterar status</label><select id=ds onchange="chDoc('${k}','${id}',this.value)">${(isQ?qOpts(d.status):stList('o',d.status).map(s=>[s,s])).map(([a,b])=>`<option value="${esc(a)}" ${a==d.status?'selected':''}>${esc(b)}</option>`).join('')}</select>`}
+${isQ?'':`<h4>Ordens de serviço (${ws.length})</h4>${ws.length?ws.map(w=>`<div class="card" ${openKey(w.id)}><b>OS #${w.n}</b> ${wst(w)} ${ptag(w)}<br><span class=mu>${get('s',w.s)?esc(get('s',w.s).nome):'sem responsável'} · previsão ${dshort(w.due)}</span></div>`).join(''):'<p class=mu>Nenhuma OS gerada para este pedido.</p>'}`}
+<div class=row>${isQ?(conv?`<button class="b g s" onclick="docQ('${id}')">Imprimir / PDF</button>`:`${d.status=='Aprovado'&&!od?`<button class=b onclick="newO('${id}')">Gerar pedido</button>`:''}<button class="b g s" onclick="docForm('q','${id}')">Editar</button><button class="b g s" onclick="dupQ('${id}')">Duplicar</button><button class="b g s" onclick="docQ('${id}')">Imprimir / PDF</button><button class="b g s" onclick="delQ('${id}')">Excluir</button>`)
+ :`<button class=b onclick="newW('${id}')">Gerar Ordem de Serviço</button><button class="b g s" onclick="docForm('o','${id}')">Editar</button><button class="b g s" onclick="delO('${id}')">Excluir</button>`}<button class="b g s" onclick=closeM()>Fechar</button></div>`)}
+/* ===== Ordens de Serviço ===== */
+const SOON=2;
+const isCanc=w=>!!w.canc,isDone=w=>w.status=='Entregue'||isCanc(w);
+const isOpen=w=>!isDone(w),opened=w=>w.date||w.start||'';
+/* situação do prazo (datas locais, AAAA-MM-DD comparáveis como texto) */
+function prazo(w){if(isCanc(w))return'cancelada';if(w.status=='Entregue')return'entregue';if(!w.due)return'sem';const t=today();return w.due<t?'atrasado':w.due<=ld(SOON)?'proxima':'noprazo'}
+const PZ={atrasado:['Atrasado','x'],proxima:['Entrega próxima','o'],noprazo:['No prazo','v'],entregue:['Entregue','v'],cancelada:['Cancelada','n'],sem:['Sem previsão','n']};
+const ptag=w=>{if(isCanc(w))return'';const[l,c]=PZ[prazo(w)];return`<span class="tag ${c}">${l}</span>`};
+const WS={'Em produção':'bl','Finalizado':'v','Entregue':'v'};
+const wtag=s=>`<span class="tag ${WS[s]||'n'}">${esc(s)}</span>`;
+const wst=w=>isCanc(w)?'<span class="tag n">Cancelada</span>':wtag(w.status);
+const wq=w=>{const o=get('o',w.o);return o?qo(o):EQ};
+const respTxt=w=>{const s=get('s',w.s);return s?esc(s.nome)+(s.ativo?'':' <span class="tag x">inativo</span>'):'<span class=mu>Sem responsável</span>'};
+const svcTxt=w=>wq(w).items.map(i=>(i.q>1?i.q+'× ':'')+i.d).join(' · ');
+const fdt=iso=>{const d=new Date(iso);return isNaN(d)?'':d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})};
+/* histórico: nunca é apagado ao editar a OS */
+const logW=(w,kind,from,to,note)=>{(w.hist=w.hist||[]).push({at:new Date().toISOString(),kind,from,to,by:'Administração',...(note?{note}:{})})};
+const histHtml=w=>{const h=[...(w.hist||[])].reverse();return h.length?`<ol class=hist>${h.map(e=>`<li><b>${fdt(e.at)}</b> · ${e.kind=='resp'?`Responsável: ${esc(e.from||'—')} → <b>${esc(e.to||'—')}</b>`:e.kind=='prazo'?`Previsão: ${e.from?dt(e.from):'—'} → <b>${e.to?dt(e.to):'—'}</b>`:e.from?`${esc(e.from)} → <b>${esc(e.to)}</b>`:`Status inicial: <b>${esc(e.to)}</b>`}<br><span class=mu>${esc(e.by||'Administração')}${e.note?' · '+esc(e.note):''}</span></li>`).join('')}</ol>`:'<p class=mu>Sem movimentações.</p>'};
+/* fluxo normal; qualquer outra mudança exige confirmação explícita */
+const FLOW={'Em produção':['Finalizado'],'Finalizado':['Em produção','Entregue'],'Entregue':[]};
+function applyStatus(w,s,note){const from=w.status;w.status=s;if(s=='Entregue')w.delivered=today();else if(from=='Entregue')w.delivered='';logW(w,'status',from,s,note);save()}
+function chW(id,s){const w=get('w',id);if(!w||isCanc(w)||s==w.status){R();return}
+ if(FLOW[w.status].includes(s)){applyStatus(w,s);R();openW(id);return}
+ const why=w.status=='Entregue'?'Esta OS já foi entregue. Reabri-la altera o histórico.':isCanc(w)?'Esta OS está cancelada.':'Esta mudança pula etapas do fluxo normal.';
+ modal(`<h3>Confirmar mudança de status</h3><p>${why}</p><p><b>${esc(w.status)}</b> → <b>${esc(s)}</b></p><div class=row><button class="b g" id=no>Cancelar</button><button class="b r" id=yes>Confirmar mesmo assim</button></div>`);
+ $('#no').onclick=()=>openW(id);$('#yes').onclick=()=>{applyStatus(w,s,'Fora do fluxo normal, confirmado pela administração');R();openW(id)}}
+/* detalhe da OS */
+function openW(id){const w=get('w',id);if(!w)return;const q=wq(w),tel=q.ctel||get('c',q.c)?.tel||'';
+ modal(`<div class=split><h3>OS #${w.n}</h3><div>${wst(w)} ${ptag(w)}</div></div><dl class=kv>
+<dt>Cliente</dt><dd>${esc(onm(q))}${tel?`<br><span class=mu>${esc(tel)}</span>`:''}</dd>
+<dt>Veículo</dt><dd>${esc(vtxt(q.v)||'—')}</dd>
+<dt>Serviços</dt><dd>${q.items.map(i=>`${i.q}× ${esc(i.d)}`).join('<br>')||'—'}</dd>
+<dt>Responsável</dt><dd>${respTxt(w)}</dd>
+<dt>Abertura</dt><dd>${dt(opened(w))}</dd>
+<dt>Previsão de entrega</dt><dd>${dt(w.due)}</dd>
+<dt>Entrega efetiva</dt><dd>${w.status=='Entregue'?(w.delivered?dt(w.delivered):'Entregue (data não registrada)'):'—'}</dd>
+<dt>Trabalho</dt><dd>${esc(w.desc||'—')}</dd>
+<dt>Observações internas</dt><dd>${esc(w.obs||'—')}</dd></dl>
+${isCanc(w)?'<p class=mu>Esta OS foi cancelada (fica em Finalizadas, identificada como “Cancelada”).</p>':`<label for=ws>Alterar status</label><select id=ws onchange="chW('${w.id}',this.value)">${opts(ST.s,w.status)}</select>`}
+<div class=row><button class=b onclick="editW('${w.id}')">Editar responsável, previsão e observações</button>${isCanc(w)?`<button class="b g s" onclick="reativW('${w.id}')">Reativar OS</button>`:w.status!='Entregue'?`<button class="b g s" onclick="cancelW('${w.id}')">Cancelar OS</button>`:''}</div>
+<h4>Histórico</h4>${histHtml(w)}
+<div class=row><button class="b g" onclick=closeM()>Fechar</button><button class="b g s" onclick="delW('${w.id}')">Excluir OS</button></div>`)}
+/* cancelar / reativar: não é um 4º status; a OS fica Finalizado + identificação "Cancelada" */
+const cancelW=id=>{const w=get('w',id);if(!w||isCanc(w)||w.status=='Entregue')return;modal(`<h3>Cancelar a OS #${w.n}?</h3><p>Ela vai para Finalizadas, identificada como “Cancelada”. O histórico é mantido.</p><div class=row><button class="b g" id=no>Voltar</button><button class="b r" id=yes>Cancelar OS</button></div>`);
+ $('#no').onclick=()=>openW(id);$('#yes').onclick=()=>{const from=w.status;w.canc=true;w.status='Finalizado';logW(w,'status',from,'Finalizado','OS cancelada');save();R();openW(id)}};
+const reativW=id=>{const w=get('w',id);if(!w||!isCanc(w))return;modal(`<h3>Reativar a OS #${w.n}?</h3><p>O cancelamento será desfeito e a OS volta para “Em produção”.</p><div class=row><button class="b g" id=no>Voltar</button><button class=b id=yes>Reativar OS</button></div>`);
+ $('#no').onclick=()=>openW(id);$('#yes').onclick=()=>{w.canc=false;w.status='Em produção';logW(w,'status','Finalizado','Em produção','OS reativada (cancelamento desfeito)');save();R();openW(id)}};
+const WF=cur=>[{k:'s',l:'Colaborador responsável',t:'select',o:[['','— sem responsável —'],...D.s.filter(s=>s.ativo||s.id==cur).map(s=>[s.id,s.nome+(s.ativo?'':' (inativo)')])]},{k:'due',l:'Previsão de entrega',t:'date'},{k:'desc',l:'Descrição do trabalho',t:'textarea'},{k:'obs',l:'Observações internas',t:'textarea'}];
+const vW=(ab,cur)=>o=>{if(o.due&&ab&&o.due<ab&&o.due!==cur)return{k:'due',msg:'A previsão de entrega não pode ser anterior à data de abertura ('+dt(ab)+').'}};
+function newW(oid){const q=qo(get('o',oid)),hoje=today();form('Nova ordem de serviço',WF(),{desc:q.items.map(i=>`${i.q}x ${i.d}`).join('; ')},o=>{const w={id:uid('w'),n:nxt(D.w),o:oid,s:o.s,date:hoje,due:o.due,delivered:'',status:'Em produção',desc:o.desc,obs:o.obs,hist:[]};logW(w,'status','','Em produção','OS criada');D.w.push(w);setTimeout(()=>openDoc('o',oid),0)},vW(hoje,''))}
+const editW=id=>{const w=get('w',id);form(`Editar OS #${w.n}`,WF(w.s),{s:w.s,due:w.due,desc:w.desc,obs:w.obs},o=>{
+ if(o.s!==w.s){logW(w,'resp',get('s',w.s)?.nome||'',get('s',o.s)?.nome||'');w.s=o.s}
+ if((o.due||'')!==(w.due||'')){logW(w,'prazo',w.due||'',o.due||'');w.due=o.due}
+ w.desc=o.desc;w.obs=o.obs;setTimeout(()=>openW(id),0)},vW(opened(w),w.due))};
+const delW=id=>ask('Excluir esta OS e todo o seu histórico?',()=>D.w=D.w.filter(w=>w.id!=id));
+/* filtros e lista */
+const FL0={resp:'',de:'',ate:'',fin:false};let FL={...FL0};
+const setF=(k,v)=>{FL[k]=v;R()},clrF=()=>{FL={...FL0,fin:FL.fin};UI.f='';R()};
+const fOS=o=>{FL={...FL0,...o};UI.f='';if(location.hash=='#os')R();else location.hash='os'};
+const nz=s=>String(s==null?'':s).toLowerCase().replace(/[^a-z0-9à-ú]/g,'');
+/* classificação única (Início e tela de OS): cada OS cai em exatamente um grupo */
+const osGroup=w=>isDone(w)?'fin':(w.due&&w.due>=today()&&w.due<=ld(SOON))?'prox':'pend';
+function filtered(){const t=nz(UI.f);
+ return D.w.filter(w=>{const q=wq(w);
+  if(FL.resp=='_none'?!!get('s',w.s):(FL.resp&&w.s!=FL.resp))return false;
+  if(FL.de&&(!w.due||w.due<FL.de))return false;if(FL.ate&&(!w.due||w.due>FL.ate))return false;
+  return !t||nz(onm(q)+' '+(q.v.placa||'')+' '+w.n).includes(t)})}
+const GRP=[['pend','Pendentes','n'],['prox','Entrega próxima','o'],['fin','Finalizadas','v']];
+const byDue=(a,b)=>{const x=a.due||'9999',y=b.due||'9999';return x<y?-1:x>y?1:a.n-b.n};
+const sortG=(k,a)=>[...a].sort(k=='fin'?(x,y)=>y.n-x.n:byDue);
+const openKey=id=>`onclick="openW('${id}')" onkeydown="if(event.key=='Enter'||event.key==' '){event.preventDefault();openW('${id}')}" role=button tabindex=0`;
+const dshort=d=>{if(!d)return'—';const[y,m,dd]=d.split('-');return y==String(new Date().getFullYear())?dd+'/'+m:dd+'/'+m+'/'+y};
+const svcShort=w=>{const it=wq(w).items;return it.length?esc(it[0].d)+(it.length>1?` +${it.length-1}`:''):'—'};
+const wRow=(w,mini)=>{const q=wq(w),pz=prazo(w);return`<div class="card wc ${pz=='atrasado'?'late':pz=='proxima'?'soon':''} ${isCanc(w)?'canc':''} ${mini?'mini':''}" ${openKey(w.id)}>
+<div class=w1><b>OS #${w.n} · ${esc(onm(q))}</b></div><div class=w2>${esc(vtxt(q.v)||'—')}</div><div class=w6 title="${esc(svcTxt(w))}">${svcShort(w)}</div>
+<div class=w3>${respTxt(w)}</div><div class=w4>${dshort(w.due)} ${ptag(w)}</div><div class=w5>${wst(w)}</div></div>`};
+const nActive=()=>!!FL.resp+!!FL.de+!!FL.ate;
+const filtersHtml=n=>{const so=[['','Todos'],['_none','Sem responsável'],...D.s.filter(s=>s.ativo||D.w.some(w=>w.s==s.id)).map(s=>[s.id,s.nome+(s.ativo?'':' (inativo)')])],na=nActive();
+ return`<div class=bar>${search('Nº da OS, cliente ou placa')}<button class="b g" onclick="UI.fo=!UI.fo;R()" aria-expanded="${!!UI.fo}">${svg('filter')} Filtros${na?` <span class=badge>${na}</span>`:''}</button></div>
+${UI.fo?`<div class="card fpanel"><div class=fgrid>
+<div><label for=fre>Responsável</label><select id=fre onchange="setF('resp',this.value)">${opts(so,FL.resp)}</select></div>
+<div><label for=fde>Previsão de</label><input type=date id=fde value="${FL.de}" onchange="setF('de',this.value)"></div>
+<div><label for=fat>Previsão até</label><input type=date id=fat value="${FL.ate}" onchange="setF('ate',this.value)"></div></div></div>`:''}
+<div class="row meta"><span class=mu>${n} OS</span>${(na||UI.f)?`<button class="b g s" onclick=clrF()>Limpar filtros</button>`:''}</div>`};
+function vOS(){const L=filtered(),t=`<h2>Ordens de Serviço</h2>`+filtersHtml(L.length);
+ if(!D.w.length)return t+'<div class=card>Nenhuma OS ainda.<br><span class=mu>Para criar uma OS, abra um pedido em Comercial e use “Gerar Ordem de Serviço”.</span></div>';
+ return t+GRP.map(([k,l,c])=>{const g=sortG(k,L.filter(w=>osGroup(w)==k)),body=g.length?g.map(w=>wRow(w)).join(''):`<p class=mu>Nenhuma OS ${k=='pend'?'pendente':k=='prox'?'com entrega próxima':'finalizada'}.</p>`;
+  return k=='fin'?`<details class=fin ${(FL.fin||UI.f)?'open':''} ontoggle="FL.fin=this.open"><summary class="gh ${c}">${l} (${g.length})</summary>${body}</details>`:`<h3 class="gh ${c}">${l} (${g.length})</h3>${body}`}).join('')}
+/* ===== Colaboradores ===== */
+const SF=[{k:'nome',l:'Nome',r:1},{k:'tel',l:'Telefone',m:'phone'},{k:'esp',l:'Especialidade'},{k:'ativo',l:'Situação',t:'select',o:[['true','Ativo'],['false','Inativo']]},{k:'obs',l:'Observações',t:'textarea'}];
+function editS(id){const s=id?get('s',id):{ativo:true};form(id?'Editar colaborador':'Novo colaborador',SF,{...s,ativo:String(s.ativo)},o=>{o.ativo=o.ativo=='true';id?Object.assign(s,o):D.s.push({id:uid('s'),...o})})}
+const delS=id=>{const w=D.w.filter(w=>w.s==id);if(w.length)return info(`Este colaborador tem ${w.length} OS atribuída(s). Reatribua as OS ou marque o colaborador como Inativo.`);ask('Excluir este colaborador?',()=>D.s=D.s.filter(s=>s.id!=id))};
+const vStaff=()=>`<h2>Colaboradores</h2><div class=bar><button class=b onclick=editS()>+ Novo colaborador</button></div>`+(D.s.map(s=>`<div class=card><b>${esc(s.nome)}</b> ${s.ativo?'':'<span class="tag x">Inativo</span>'}<br><span class=mu>${esc(s.esp||'')} ${esc(s.tel||'')}</span><div class=row><button class="b g s" onclick="editS('${s.id}')">Editar</button><button class="b g s" onclick="delS('${s.id}')">Excluir</button></div></div>`).join('')||'<p class=mu>Nenhum colaborador cadastrado.</p>');
+/* ===== Início ===== */
+function vHome(){const gp=k=>sortG(k,D.w.filter(w=>osGroup(w)==k)),P=gp('pend'),X=gp('prox'),F=gp('fin'),
+ prev=(D.o.filter(o=>o.status!='Cancelado').reduce((a,o)=>a+cents(tot(qo(o))),0)+D.q.filter(q=>!q.conv&&q.status!='Recusado'&&!D.o.some(o=>o.q==q.id)).reduce((a,q)=>a+cents(tot(q)),0))/100;
+ const card=(l,v,f)=>f?`<div class=stat role=button tabindex=0 onclick="${f}" onkeydown="if(event.key=='Enter')${f}"><b>${v}</b><small>${l}</small></div>`:`<div class=stat><b>${v}</b><small>${l}</small></div>`;
+ const list=(arr,f)=>arr.length?arr.slice(0,5).map(w=>wRow(w,1)).join('')+(arr.length>5?`<button class="b g s" onclick="${f}">Ver todas</button>`:''):'<p class=mu>Nenhuma OS.</p>';
+ return`<div class=split style="align-items:center"><h2>Início</h2><button class="b s" onclick=newDoc()>+ Novo</button></div>
+<div class="grid k4">${card('Faturamento previsto',R$(prev))}${card('Pendentes',P.length,"fOS()")}${card('Entrega próxima',X.length,"fOS()")}${card('Finalizadas',F.length,"fOS({fin:true})")}</div>
+<h3 class="gh n">Pendentes (${P.length})</h3>${list(P,'fOS()')}
+<h3 class="gh o">Entrega próxima (${X.length})</h3>${list(X,'fOS()')}
+<details class=fin><summary class="gh v">Finalizadas (${F.length})</summary>${list(F,'fOS({fin:true})')}</details>`}
+/* ===== Configurações ===== */
+const theme=t=>{document.documentElement.dataset.theme=t;localStorage.setItem('jesse_theme',t)};
+const BK=KEY+'_backup_ultima';
+const mkBackup=motivo=>{try{localStorage.setItem(BK,JSON.stringify({at:new Date().toISOString(),motivo,data:D}));return true}catch(e){return false}};
+const readBK=()=>{try{const b=JSON.parse(localStorage.getItem(BK)||'null');return b&&b.data&&b.data.c?b:null}catch(e){return null}};
+const resetUI=()=>{FL={...FL0};CM={...CM0};UI.f='';UI.fo=false};
+const cnt=d=>`${d.c.length} cliente(s), ${d.q.length} orçamento(s), ${d.o.length} pedido(s), ${d.w.length} OS, ${d.s.length} colaborador(es)`;
+function askRestore(){ask('Restaurar os dados demonstrativos? Os dados atuais serão substituídos pelos exemplos. Uma cópia de segurança dos dados atuais será guardada antes.',()=>{mkBackup('restauração dos dados demonstrativos');D=seed();resetUI()})}
+function askClear(){modal(`<h3>Limpar dados demonstrativos</h3><p>Serão removidos <b>todos</b> os registros deste aparelho:</p><ul class=li><li>${D.c.length} cliente(s)</li><li>${D.q.length} orçamento(s)</li><li>${D.o.length} pedido(s)</li><li>${D.w.length} ordem(ns) de serviço, com o histórico</li><li>${D.s.length} colaborador(es)</li></ul>
+<p><b>Atenção:</b> registros criados por você durante os testes também serão apagados. O tema e as preferências são mantidos. Uma cópia de segurança dos dados atuais será guardada antes.</p>
+<label for=cf>Para confirmar, digite LIMPAR</label><input id=cf autocomplete=off autocapitalize=characters spellcheck=false><p class=er id=cerr></p>
+<div class=row><button class="b g" onclick=closeM()>Cancelar</button><button class="b r" id=go disabled>Limpar dados</button></div>`);
+ $('#cf').oninput=e=>{$('#go').disabled=e.target.value.trim().toUpperCase()!='LIMPAR'};
+ $('#go').onclick=()=>{if(!mkBackup('limpeza dos dados demonstrativos')){$('#cerr').textContent='Não foi possível criar a cópia de segurança. Nada foi apagado.';return}
+  D={c:[],q:[],o:[],s:[],w:[],ver:D.ver};save();resetUI();closeM();toast('Dados removidos. Cópia de segurança guardada.');R()}}
+function askUndo(){const b=readBK();if(!b)return;modal(`<h3>Restaurar cópia de segurança</h3><p>Cópia de ${fdt(b.at)} (${esc(b.motivo)}):<br><span class=mu>${cnt(b.data)}</span></p><p>Os dados atuais serão substituídos por esta cópia.</p><div class=row><button class="b g" onclick=closeM()>Cancelar</button><button class=b id=ok2>Restaurar cópia</button></div>`);
+ $('#ok2').onclick=()=>{D=b.data;migrate(D);save();resetUI();closeM();toast('Cópia restaurada.');R()}}
+const vCfg=()=>{const bk=readBK();return`<h2>Configurações</h2><div class=card><h3>Tema</h3><div class=row style="margin-top:0"><button class="b g" onclick="theme('light');R()">Claro</button><button class="b g" onclick="theme('dark');R()">Escuro</button></div></div>
+<div class=card><h3>Empresa</h3><img src="icons/logo.jpg" style="height:48px;border-radius:6px"><p>Jessé Auto Couros e Capotas<br><span class=mu>Serviço em couro para toda linha automotiva.</span></p></div>
+<div class=card><h3>Dados</h3><p class=mu>Os dados ficam salvos só neste aparelho/navegador e não sincronizam entre dispositivos.</p>${D.mig?`<p class=mu>Atualização 1.2: ${D.mig.n} pedido(s) receberam cópia independente dos dados do orçamento (${D.mig.at}).</p>`:''}${D.migw?`<p class=mu>Atualização 1.4: ${D.migw.n} OS receberam histórico e ${D.migw.mapped} tiveram o status convertido (Concluída → Pronto para entrega; Pausada → Em execução). Uma cópia dos dados da versão anterior foi guardada automaticamente neste navegador.</p>`:''}${D.migs?`<p class=mu>Atualização 1.5.1: ${D.migs.q} orçamento(s) e ${D.migs.o} pedido(s) tiveram o status antigo convertido e ${D.migs.conv} orçamento(s) já convertidos em pedido foram arquivados (nada foi apagado). Uma cópia dos dados anteriores foi guardada neste navegador.</p>`:''}${D.migo?`<p class=mu>Atualização 1.5.3: ${D.migo.n} OS tiveram o status antigo simplificado (${D.migo.canc} cancelada(s) preservada(s) como “Cancelada”). A migração foi registrada no histórico de cada OS e uma cópia dos dados anteriores foi guardada neste navegador.</p>`:''}${window.__migErr?'<p class=er>A atualização dos dados falhou; os dados originais foram mantidos.</p>':''}${D.pend?.length?`<p class=er>Atenção: o(s) pedido(s) #${D.pend.join(', #')} não puderam ser migrados (orçamento original não encontrado). Os dados foram preservados.</p>`:''}${bk?`<p class=mu>Cópia de segurança de ${fdt(bk.at)} (${esc(bk.motivo)}): ${cnt(bk.data)}.</p><button class="b g s" onclick="askUndo()">Restaurar cópia de segurança</button>`:''}</div>
+<div class=card><h3>Restaurar dados demonstrativos</h3><p class=mu>Substitui os dados atuais pelos exemplos do sistema (clientes, orçamentos, pedidos, OS e colaboradores fictícios).</p><button class="b g" onclick="askRestore()">Restaurar dados demonstrativos</button></div>
+<div class=card><h3>Limpar dados demonstrativos</h3><p class=mu>Remove todos os registros e deixa o sistema vazio, pronto para uma apresentação ou para dados reais.</p><button class="b r" onclick="askClear()">Limpar dados demonstrativos</button></div>
+<div class=card><h3>Sobre</h3><p class=mu>Versão 1.5.3 (demonstração). Preparado para evoluir com banco de dados e login.</p></div>`}
+
+/* ===== Navegação ===== */
+const IC={home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',clients:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.3c1.8.8 3 2.6 3 5.7"/>',com:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',os:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 14l2 2 4-4"/>',more:'<circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/>',orders:'<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>',staff:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>',cfg:'<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>',filter:'<path d="M3 5h18l-7 8v6l-4 2v-8z"/>'};
+const svg=k=>`<svg class=ic viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>`;
+const V_={home:['Início',vHome],clients:['Clientes',vClients],com:['Comercial',vCom],os:['OS',vOS],staff:['Colaboradores',vStaff],cfg:['Configurações',vCfg]};
+const NAV1=['home','clients','com','os'],NAV2=['staff','cfg'];let MORE=false;
+const navHtml=()=>NAV1.map(k=>`<a href="#${k}" class="${k==cur?'on':''}" ${k==cur?'aria-current="page"':''}>${svg(k)}<span>${V_[k][0]}</span></a>`).join('')
+ +`<button type=button id=mb class="${NAV2.includes(cur)||MORE?'on':''}" aria-haspopup="menu" aria-expanded="${MORE}" onclick="toggleMore(event)">${svg('more')}<span>Mais</span></button>`
+ +(MORE?`<div class=more role=menu>${NAV2.map(k=>`<a role=menuitem href="#${k}" class="${k==cur?'on':''}" onclick="MORE=false;setTimeout(renderNav,0)">${svg(k)}<span>${V_[k][0]}</span></a>`).join('')}</div>`:'');
+const renderNav=()=>{$('#nav').innerHTML=navHtml()},toggleMore=e=>{e.stopPropagation();MORE=!MORE;renderNav()};
+let cur='home';
+function R(keep){const v=V_[cur]||V_.home;renderNav();
+ const f=keep&&document.activeElement?.id=='sq';$('#app').innerHTML=v[1]();if(f){const s=$('#sq');s.focus();s.setSelectionRange(99,99)}}
+const ALIAS={quotes:'com',orders:'com'};
+function route(){const h=location.hash.slice(1)||'home';if(h=='quotes')CM={...CM0,tipo:'q'};else if(h=='orders')CM={...CM0,tipo:'o'};cur=ALIAS[h]||h}
+addEventListener('hashchange',()=>{route();MORE=false;UI.f='';scrollTo(0,0);R()});
+document.addEventListener('click',e=>{if(MORE&&!e.target.closest('nav')){MORE=false;renderNav()}});
+document.addEventListener('keydown',e=>{if(e.key=='Escape'&&MORE){MORE=false;renderNav();$('#mb')?.focus()}});
+{const kb=e=>document.body.classList.toggle('kb',e.type=='focusin'&&/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)&&!e.target.closest('.md')&&matchMedia('(max-width:799px)').matches);addEventListener('focusin',kb);addEventListener('focusout',kb)}
+route();
+theme(localStorage.getItem('jesse_theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+R();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>

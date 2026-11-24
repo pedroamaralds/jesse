@@ -1,0 +1,1 @@
+Uso: node tests/utils.test.js (precisa do Node.js; não faz parte do app publicado)
